@@ -25,26 +25,31 @@ class _LoginPageState extends State<LoginPage> {
     print('Password1: $_pass1');
     print('Password2: $_pass2');
 
-    String api = 'https://social-network-for-class.herokuapp.com/users';
+    if (_pass1 == _pass2) {
+      String api = 'https://social-network-for-class.herokuapp.com/users';
 
-    Response response = await post(
-      Uri.parse(api),
-      headers: <String, String>{'Content-Type': 'application/json'},
-      body: jsonEncode(
-          <String, String>{'name': _name, 'email': _email, 'password': _pass1}),
-    );
+      Response response = await post(
+        Uri.parse(api),
+        headers: <String, String>{'Content-Type': 'application/json'},
+        body: jsonEncode(<String, String>{
+          'name': _name,
+          'email': _email,
+          'password': _pass1
+        }),
+      );
 
-    if (response.statusCode == 201) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    } else {
-      // configura o  AlertDialog
-      const AlertDialog(
-        title: Text("Erro no cadastro"),
-        content: Text("Falha no cadastro, verifique as informações"),
-      );
+      if (response.statusCode == 201) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        // configura o  AlertDialog
+        const AlertDialog(
+          title: Text("Erro no cadastro"),
+          content: Text("Falha no cadastro, verifique as informações"),
+        );
+      }
     }
   }
 
