@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_network_flutter/login.dart';
+import 'package:social_network_flutter/home.dart';
 
 void main() {
   runApp(const MyApp());
